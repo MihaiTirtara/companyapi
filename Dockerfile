@@ -1,16 +1,13 @@
-FROM ruby:2.3.0-alpine
-
+FROM ruby:2.3.0-slim
 RUN apt-get update -qq && apt-get install -y build-essential
 
-ENV APP_HOME /app
-RUN mkdir $APP_HOME
-WORKDIR $APP_HOME
-
-ADD Gemfile* $APP_HOME/
-RUN gem install bundler -v 2.0.2
+ENV APP_ROOT /var/www/docker-sinatra
+ENTRYPOINT mkdir -p $APP_ROOT
+WORKDIR $APP_ROOT
+COPY Gemfile* $APP_ROOT/
+RUN gem install bundler --version 2.0.2
 RUN bundle install
-
-ADD . $APP_HOME
+COPY . $APP_ROOT
 
 EXPOSE 4567
 
