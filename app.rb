@@ -10,13 +10,7 @@ Bundler.require
 #database
 require 'data_mapper'
 
-DataMapper.setup :default,{
-  :adapter => 'postgres',
-  :host => 'localhost',
-  :database => 'postgres',
-  :user => 'postgres',
-  :password => 'postgres'
-}
+DataMapper.setup (:default, ENV['DATABASE_URL'] || "postgres://postgres:postgres@localhost/postgres")
 
 
 class Company
