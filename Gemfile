@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'sinatra', '>=1.0'
 gem 'sinatra-contrib'
+gem 'sinatra-cors'
 gem 'rake'
 gem 'data_mapper'
 gem 'dm-core'

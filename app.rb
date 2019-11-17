@@ -3,6 +3,7 @@ require 'bundler'
 require 'sinatra/json'
 require 'sinatra/cross_origin'
 
+
 Bundler.require
 #require 'database'
 
@@ -43,26 +44,21 @@ class Owner
 end
 
 DataMapper.finalize
-DataMapper.auto_upgrade!
+DataMapper.auto_migrate!
 
 
 #DataMapper.setup(:default,'sqlite::memory:')
 #DataMapper.finalize
 #DataMapper.auto_upgrade!
 
+set :allow_origin, "*"
+set :allow_methods, "GET,HEAD,POST, PUTCH, DELETE,OPTIONS"
+set :allow_headers, "Authorization, Content-Type, Accept, X-User-Email, X-Auth-Token"
+set :expose_headers, "location,link"
 
-configure do
-   enable :cross_origin
- end
- before do
-   response.headers['Access-Control-Allow-Origin'] = '*'
- end
 
- options "*" do
-     response.headers["Allow"] = "GET, PUT, PATCH, POST, DELETE, OPTIONS"
-     response.headers["Access-Control-Allow-Headers"] = "Authorization, Content-Type, Accept, X-User-Email, X-Auth-Token"
-     response.headers["Access-Control-Allow-Origin"] = "*"
-   end
+
+
 
 get '/' do
   'Welcome to company'
