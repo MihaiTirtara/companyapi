@@ -96,7 +96,9 @@ end
 #add owner to the company
 post '/owners'do
   content_type :json
-  owner = Owner.new params[:owner]
+  owner = Owner.new params
+  owner.name = params[:name]
+  owner.company_id = params[:company_id]
   if owner.save
     status 201
   else
