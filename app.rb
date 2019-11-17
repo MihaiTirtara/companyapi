@@ -109,7 +109,7 @@ end
 
 
 #update a company
-put '/companies/:id'do
+patch '/companies/:id'do
   content_type :json
   company = Company.get params[:id]
   if company.update params[:company]
